@@ -6,9 +6,9 @@ import sqlalchemy
 def GetHistoricalData(ticker, source):
     '''
     ticker (str): Stock ticker symbol.
-    source (str): The database to pull the data from as outlined in pandas datareader.
+    source (str): The source to pull the data from as outlined in pandas datareader documentation.
 
-    Returns a dataframe.
+    Returns a dataframe with stock price data from January 1, 1970 to present.
     '''
     # Start date is Jan 1, 1970 because Yahoo uses Unix timestamps in their requests URL.
     # Any date before that causes problems with request from Yahoo.
