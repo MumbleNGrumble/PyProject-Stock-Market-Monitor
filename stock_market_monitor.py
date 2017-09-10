@@ -22,6 +22,17 @@ def GetHistoricalData(ticker, source):
     # Yahoo dataframe columns: Open, High, Low, Close, Adj Close, and Volume.
     return web.DataReader(ticker, source, start, end)
 
+def ReadDBToDF(database, sql, parse_dates=None):
+    '''
+    database (str): Name of the database to read from.
+    sql (str): Name of the table to read from or the query to run.
+    parse_dates (list): List of column names to parse as dates, per the pandas documentation.
+
+    Returns a dataframe with the table/query results.
+    '''
+    engine = sqlalchemy.create_engine("mssql+pyodbc://.\MSSQLSERVER2016/" + database + "?driver=SQL+Server")
+    return pd.read_sql(sql, engine, parse_dates=parse_dates)
+
 def WriteDFToDB(df, database, table):
     '''
     df (dataframe): Pandas dataframe object.
