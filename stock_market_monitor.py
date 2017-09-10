@@ -48,3 +48,6 @@ def WriteDFToDB(df, database, table):
 
 
 output = GetHistoricalData("^GSPC", "yahoo")
+output["StockID"] = 1
+output.rename(columns={"Adj Close": "AdjClose"}, inplace=True)
+WriteDFToDB(output, "StockMarketMonitor", "StockDailyData")
