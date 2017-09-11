@@ -33,6 +33,10 @@
 
 ## *To Do List*
 - [ ] Research licenses and add one to readme if necessary.
-- [ ] Write a function that grabs stock price history from Yahoo Finance. It should take a stock ticker as an argument so the function can pull the S&P 500 index as well as individual stocks.
-- [ ] Set up database tables based on what's returned from Yahoo Finance.
-- [ ] Write functions to read and write data to the database from Python.
+- [x] Write a function that grabs stock price history from Yahoo Finance. It should take a stock ticker as an argument so the function can pull the S&P 500 index as well as individual stocks.
+- [x] Set up database tables based on what's returned from Yahoo Finance.
+- [x] Set up database tables to track portfolios and buy/sell transactions.
+- [ ] Rename "Adj Close" column from Yahoo to "AdjClose" for writing to database.
+- [ ] Rread and write data to the database from Python.
+- [ ] Calculate moving averages.
+- [ ] Predict stock price change direction from moving averages.
