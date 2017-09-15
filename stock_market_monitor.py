@@ -20,7 +20,12 @@ def GetHistoricalData(ticker, source):
 
     # Yahoo dataframe index: Date.
     # Yahoo dataframe columns: Open, High, Low, Close, Adj Close, and Volume.
-    return web.DataReader(ticker, source, start, end)
+    df = web.DataReader(ticker, source, start, end)
+
+    # Rename Adj Close to match database column label.
+    df.rename(columns={"Adj Close": "AdjClose"}, inplace=True)
+
+    return df
 
 def GetRecentData(database, table, ticker, source):
     '''
@@ -57,6 +62,7 @@ def GetRecentData(database, table, ticker, source):
         start = latestDate + dt.timedelta(days=1)
         end = dt.date.today() - dt.timedelta(days=1)
         df = web.DataReader(ticker, source, start, end)
+        df.rename(columns={"Adj Close": "AdjClose"}, inplace=True)  # Rename Adj Close to match database column label.
 
         if latestDate == df.index[0].date():
             print("Database is up to date for " + ticker + ".")
