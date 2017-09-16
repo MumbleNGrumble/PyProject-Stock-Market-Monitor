@@ -84,16 +84,17 @@ def GetRecentData(database, table, ticker, source):
         print("Database is up to date for " + ticker + ".")
         return None
 
-def ReadDBToDF(database, sql, parse_dates=None):
+def ReadDBToDF(database, sql, parse_dates=None, index_col=None):
     '''
     database (str): Name of the database to read from.
     sql (str): Name of the table to read from or the query to run.
     parse_dates (list): List of column names to parse as dates, per the pandas documentation.
+    index_col (str): Name of column to set as dataframe index.
 
     Returns a dataframe with the table/query results.
     '''
     engine = sqlalchemy.create_engine("mssql+pyodbc://.\MSSQLSERVER2016/" + database + "?driver=SQL+Server")
-    return pd.read_sql(sql, engine, parse_dates=parse_dates)
+    return pd.read_sql(sql, engine, parse_dates=parse_dates, index_col=index_col)
 
 def WriteDFToDB(df, database, table):
     '''
