@@ -3,6 +3,17 @@ import pandas as pd
 import pandas_datareader.data as web
 import sqlalchemy
 
+def CalculateSMA(df, column, periods=[5, 10, 20, 50, 200]):
+    '''
+    df (dataframe): Dataframe to append moving averages to.
+    column (str): Column to calculate moving averages on.
+    period (list): Periods to calculate moving averages for.
+
+    Appends moving averages to dataframe.
+    '''
+    for period in periods:
+        df["SMA(" + str(period) + ")"] = df[column].rolling(period).mean()
+
 def GetHistoricalData(ticker, source):
     '''
     ticker (str): Stock ticker symbol.
@@ -98,7 +109,7 @@ def WriteDFToDB(df, database, table):
     df.to_sql(table, engine, if_exists="append")
 
 
-output = GetHistoricalData("^GSPC", "yahoo")
-output["StockID"] = 1
-output.rename(columns={"Adj Close": "AdjClose"}, inplace=True)
-WriteDFToDB(output, "StockMarketMonitor", "StockDailyData")
+#output = GetHistoricalData("^GSPC", "yahoo")
+#output["StockID"] = 1
+#output.rename(columns={"Adj Close": "AdjClose"}, inplace=True)
+#WriteDFToDB(output, "StockMarketMonitor", "StockDailyData")
