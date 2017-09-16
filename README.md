@@ -20,7 +20,7 @@
 ## *Feature Roadmap*
 - Pull stock data via Yahoo Finance.
 - Set up SQL database to store data.
-- Calculate 5 day, 30 day, and 1 year moving averages.
+- Calculate moving averages.
 - Track a single stock portfolio and monitor profits and losses.
 - Back calculate profit and list history of a trading algorithm.
 - Establish a buy and hold benchmark to compare trading algorithms against.
@@ -36,7 +36,7 @@
 - [x] Write a function that grabs stock price history from Yahoo Finance. It should take a stock ticker as an argument so the function can pull the S&P 500 index as well as individual stocks.
 - [x] Set up database tables based on what's returned from Yahoo Finance.
 - [x] Set up database tables to track portfolios and buy/sell transactions.
-- [ ] Rename "Adj Close" column from Yahoo to "AdjClose" for writing to database.
-- [ ] Rread and write data to the database from Python.
+- [x] Rename "Adj Close" column from Yahoo to "AdjClose" for writing to database.
+- [x] Read and write data to the database from Python.
 - [ ] Calculate moving averages.
 - [ ] Predict stock price change direction from moving averages.
