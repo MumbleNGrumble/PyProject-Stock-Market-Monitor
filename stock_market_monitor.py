@@ -66,9 +66,6 @@ def GetRecentData(database, table, ticker, source):
     latestDate = ReadDBToDF(database, dateQuery, ["Date"])["Date"][0]
     latestDate = latestDate.date()  # Pandas returns a timestamp. This converts it to a date.
 
-    # TODO: Can we make this more efficient?
-    # TODO: Need to account for errors when the source returns something unexpected.
-    # TODO: Should this write to the database if there is new data?
     # Returns a dataframe with new records if there is new data between the last database record date and yesterday's date.
     if latestDate < dt.date.today() - dt.timedelta(days=1):
         start = latestDate + dt.timedelta(days=1)
