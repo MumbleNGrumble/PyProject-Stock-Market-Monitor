@@ -44,3 +44,5 @@
 - [ ] Create a benchmark by using a buy and hold strategy with the SPDR S&P 500 ETF (SPY). Do not account for dividends for now.
 - [ ] Generate plots.
 - [ ] Calculate moving average crossover strategy.
+- [ ] GetRecentData function improvements:
+    - [ ] Need to account for errors when the source returns something unexpected.
