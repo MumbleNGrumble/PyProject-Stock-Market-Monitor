@@ -1,4 +1,5 @@
 import datetime as dt
+import numpy as np
 import pandas as pd
 import pandas_datareader.data as web
 import sqlalchemy
@@ -84,6 +85,32 @@ def GetRecentData(database, table, ticker, source):
         print("Database is up to date for " + ticker + ".")
         return None
 
+def PriceCrossoverStrat(df, priceCol, maCol):
+    '''
+    df (dataframe): Dataframe to append the price crossover strategy to.
+    priceCol (str): Name of the price column.
+    maCol (str): Name of the moving average column.
+
+    Calculates the price crossover strategy and appends it to the dataframe.
+    '''
+    # Calculate if price is greater than moving average.
+    df["P > MA"] = df[priceCol] > df[maCol]
+
+    # Shift P > MA results forward 1 index in order to compare current with previous to identify crossover.
+    df["P > MA Previous"] = df["P > MA"].shift(1)
+    
+    # Compares previous price/moving average to current price/moving average.
+    # False -> True, Buy. True -> False, Sell. Previous == Current, Hold. 
+    df["P Cross"] = np.nan
+    df.loc[(df["P > MA Previous"] == False) & (df["P > MA"] == True), "P Cross"] = "Long"
+    df.loc[(df["P > MA Previous"] == True) & (df["P > MA"] == False), "P Cross"] = "Short"
+    df.loc[(df["P > MA"] == df["P > MA Previous"]) & (df["P > MA"] == True), "P Cross"] = "Hold (Long)"
+    df.loc[(df["P > MA"] == df["P > MA Previous"]) & (df["P > MA"] == False), "P Cross"] = "Hold (Short)"
+    df.rename(columns={"P Cross": "P Cross " + maCol}, inplace=True)
+
+    # Remove unnecessary columns.
+    df.drop(["P > MA", "P > MA Previous"], axis=1, inplace=True)
+    
 def ReadDBToDF(database, sql, parse_dates=None, index_col=None):
     '''
     database (str): Name of the database to read from.
