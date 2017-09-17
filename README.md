@@ -38,5 +38,9 @@
 - [x] Set up database tables to track portfolios and buy/sell transactions.
 - [x] Rename "Adj Close" column from Yahoo to "AdjClose" for writing to database.
 - [x] Read and write data to the database from Python.
-- [ ] Calculate moving averages.
-- [ ] Predict stock price change direction from moving averages.
+- [x] Calculate moving averages.
+- [x] Calculate price crossover strategy.
+- [ ] Calculate profit and loss from executing strategy. Should be able to apply strategy to specific time periods and use 'long only', 'short only', or 'long and short' transactions.
+- [ ] Create a benchmark by using a buy and hold strategy with the SPDR S&P 500 ETF (SPY). Do not account for dividends for now.
+- [ ] Generate plots.
+- [ ] Calculate moving average crossover strategy.
